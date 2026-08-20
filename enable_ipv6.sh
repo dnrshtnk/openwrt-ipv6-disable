@@ -30,8 +30,13 @@ echo "----------------------------------------"
 echo "Завершено."
 sleep 1
 
-printf "Перезапустить сеть сейчас? (y/n): "
-read -r response
+if [ -t 0 ]; then
+    printf "Перезапустить сеть сейчас? (y/n): "
+    read -r response < /dev/tty
+else
+    echo "Пропуск"
+    response="n"
+fi
 
 if [ "$response" = "y" ] || [ "$response" = "Y" ]; then
     echo "Перезапуск..."
